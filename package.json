@@ -1,0 +1,27 @@
+{
+  "name": "persianpl-panel",
+  "version": "0.1.0",
+  "private": true,
+  "description": "PersianPl-Panel — multi-user VLESS/VMess/Trojan panel on Cloudflare Workers + D1",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.test.json",
+    "check": "npm run typecheck && wrangler deploy --dry-run",
+    "db:create": "wrangler d1 create persianpl-panel",
+    "db:local": "wrangler d1 migrations apply persianpl-panel --local",
+    "db:remote": "wrangler d1 migrations apply persianpl-panel --remote",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5",
+    "@types/node": "22.10.2",
+    "typescript": "^5.7",
+    "vitest": "^2.1",
+    "wrangler": "^4"
+  },
+  "dependencies": {
+    "@noble/curves": "^2.4.0"
+  }
+}

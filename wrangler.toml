@@ -1,0 +1,32 @@
+name = "persianpl-panel"
+main = "src/index.ts"
+compatibility_date = "2025-05-01"
+compatibility_flags = ["nodejs_compat"]
+
+# ── D1: تنها منبع حقیقت پنل (KV فقط ۱۰۰۰ write/day دارد، پس برای آمار استفاده نمی‌شود)
+[[d1_databases]]
+binding = "DB"
+database_name = "persianpl-panel"
+database_id = "REPLACE_WITH_YOUR_D1_ID"
+
+# ── KV اختیاری: فقط کش کانفیگ نود و لیست IP تمیز (نه آمار)
+# [[kv_namespaces]]
+# binding = "CACHE"
+# id = "REPLACE_WITH_YOUR_KV_ID"
+
+[vars]
+# panel | node
+ROLE = "panel"
+# نقش node فقط این دو را لازم دارد (به‌صورت secret ست شود):
+#   PANEL_URL  = "https://panel.example.com"
+#   NODE_TOKEN = "…"
+
+[observability]
+enabled = true
+
+# انقضا، ریست دوره‌ای ترافیک، و rollup آمار
+[triggers]
+crons = ["*/5 * * * *"]
+
+[placement]
+mode = "smart"
